@@ -12,7 +12,7 @@ public class Main {
         factory.setHost("localhost");
         factory.setUsername("rabbitmq");
         factory.setPassword("rabbitmq");
-        factory.setVirtualHost("/wfm");
+        factory.setVirtualHost("/vhost");
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
@@ -23,6 +23,6 @@ public class Main {
             String message = new String(delivery.getBody(), "UTF-8");
             System.out.println(" [x] Received '" + message + "'");
         };
-        channel.basicConsume("talkdesk.events.queue", true, deliverCallback, consumerTag -> { });
+        channel.basicConsume("queue-name", true, deliverCallback, consumerTag -> { });
     }
 }
